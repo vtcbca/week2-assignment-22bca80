@@ -1,0 +1,87 @@
+Work with sqlite3
+
+c:\Users\DhruvMistry\ cd c:\sqlite3
+c:\sqlite3>sqlite3 stud.db
+SQLite version 3.42.0 2023-05-16 12:36:15
+Enter ".help" for usage hints.
+sqlite>create table stud
+	..>(
+	..>id int primary key,
+	..>name char[20]
+	..>);
+sqlite>create table stud_details
+	..>(
+	..>id int references id(stud),
+	..>city char[20],
+	..>mobileno int
+	..>);
+sqlite>insert into stud
+	..>values(1,'dhruv'),(2,'neel'),(3,'yash'),(4,'nikuj'),(5,'roshan'),(6,'zaid'),(7,'dixit'),(8,'shivam'),(9,'rishi'),(10,'vishal');
+sqlite>insert into stud_details
+	..>values(1,'Netrang',9313304730),(2,'Netrang',9723403767),(3,'Surat',9901234367),(4,'Bardoli',9734561210),(5,'Navsari',9871294578),
+(6,'Bardoli',9234156734),(7,'Surat',8912375967),(8,'Surat',9912304512),(9,'Valsad',9713201033),(10,'Mandvi',9312374037);
+sqlite3>select*from stud;
++----+--------+
+| id |  name  |
++----+--------+
+| 1  | dhruv  |
+| 2  | neel   |
+| 3  | yash   |
+| 4  | nikuj  |
+| 5  | roshan |
+| 6  | zaid   |
+| 7  | dixit  |
+| 8  | shivam |
+| 9  | rishi  |
+| 10 | vishal |
++----+--------+
+sqlite>select*from stud_details;
++----+---------+------------+
+| id |  city   |  mobileno  |
++----+---------+------------+
+| 1  | Netrang | 9313304730 |
+| 2  | Netrang | 9723403767 |
+| 3  | Surat   | 9901234367 |
+| 4  | Bardoli | 9734561210 |
+| 5  | Navsari | 9871294578 |
+| 6  | Bardoli | 9234156734 |
+| 7  | Surat   | 8912375967 |
+| 8  | Surat   | 9912304512 |
+| 9  | Valsad  | 9713201033 |
+| 10 | Mandvi  | 9312374037 |
++----+---------+------------+
+sqlite>select*from stud_details
+   ...> where city='Surat';
++----+-------+------------+
+| id | city  |  mobileno  |
++----+-------+------------+
+| 3  | Surat | 9901234367 |
+| 7  | Surat | 8912375967 |
+| 8  | Surat | 9912304512 |
++----+-------+------------+
+sqlite> select*from stud_details
+   ...> where city like 'B%';
++----+---------+------------+
+| id |  city   |  mobileno  |
++----+---------+------------+
+| 4  | Bardoli | 9734561210 |
+| 6  | Bardoli | 9234156734 |
++----+---------+------------+
+sqlite> update stud_details
+   ...> set mobileno=9132400067
+   ...> where city='Surat';
+sqlite> select*from stud_details;
++----+---------+------------+
+| id |  city   |  mobileno  |
++----+---------+------------+
+| 1  | Netrang | 9313304730 |
+| 2  | Netrang | 9723403767 |
+| 3  | Surat   | 9132400067 |
+| 4  | Bardoli | 9734561210 |
+| 5  | Navsari | 9871294578 |
+| 6  | Bardoli | 9234156734 |
+| 7  | Surat   | 9132400067 |
+| 8  | Surat   | 9132400067 |
+| 9  | Valsad  | 9713201033 |
+| 10 | Mandvi  | 9312374037 |
++----+---------+------------+
